@@ -34,7 +34,7 @@ public class CapitalizeMain {
             bw.write(line.toUpperCase() + "\n");
             writer.flush();
         }
-
+        
         // Flush remaining data to file
         // bw.flush();
 
