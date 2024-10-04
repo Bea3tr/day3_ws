@@ -7,14 +7,28 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
-public class WordCount {
+public class StopWords {
     public static void main(String[] args) throws FileNotFoundException, IOException{
         
         String inputFile = args[0];
+        String stopFile = args[1];
 
         // Open inputFile for reading
         Reader reader = new FileReader(inputFile);
         BufferedReader br = new BufferedReader(reader);
+
+        Reader readStop = new FileReader(stopFile);
+        BufferedReader brs = new BufferedReader(readStop);
+
+        // Create a list for stop words
+        List<String> stopList = new LinkedList<String>();
+        String w = "";
+        while (null != w) {
+            w = brs.readLine();
+            if (null == w)
+                break;
+            stopList.add(w);
+        }
 
         // Create a map
         Map<String, Integer> uniqueWords = new HashMap<String, Integer>();
@@ -30,32 +44,22 @@ public class WordCount {
             for (String word : transformed.split(" ")) {
 
                 int currentCount = 0;
-                if (uniqueWords.containsKey(word)) {
-                    currentCount = uniqueWords.get(word);
+                if (!stopList.contains(word)) {
+                    if (uniqueWords.containsKey(word))
+                        currentCount = uniqueWords.get(word);
+                    currentCount++;
+                    uniqueWords.put(word, currentCount);
                 }
-                currentCount++;
-                uniqueWords.put(word, currentCount);
-
-                // if (uniqueWords.containsKey(word)) {
-                //     // Word is in the list
-                //     int currentCount = uniqueWords.get(word);
-                //     currentCount++;
-                //     uniqueWords.put(word, currentCount);
-                // } else {
-                //     // Word not in the list
-                //     uniqueWords.put(word, 1);
-                // }
             }
         }
         // Close files
         reader.close();
-
-        // Sorting HashMap
-        TreeMap<String, Integer> sorted = new TreeMap<>(uniqueWords);
+        readStop.close();
 
         System.out.println();
-        for (String word : sorted.keySet()) {
+        for (String word : uniqueWords.keySet()) {
             System.out.printf("%s\t\t %d\n", word, uniqueWords.get(word));
         }
     }
 }
+
