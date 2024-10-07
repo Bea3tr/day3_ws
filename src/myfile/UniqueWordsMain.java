@@ -20,7 +20,6 @@ public class UniqueWordsMain {
         // <> - generics
         Set<String> uniqueWords = new HashSet<String>();
 
-
         String line = "";
         while (null != line) {
             line = br.readLine();
