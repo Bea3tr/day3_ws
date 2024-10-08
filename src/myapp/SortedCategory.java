@@ -52,17 +52,17 @@ public class SortedCategory {
             }
             br.close();
 
-            HashMap<String, String[]> hList = c.highest(overall);
+            TreeMap<String, String[]> hList = c.highest(overall);
             for(String category : hList.keySet()) {
                 System.out.printf("App with highest rating in %s category: %s (%s)\n", category, hList.get(category)[0], hList.get(category)[1]);
             }
 
-            HashMap<String, String[]> lList = c.lowest(overall);
+            TreeMap<String, String[]> lList = c.lowest(overall);
             for(String category : lList.keySet()) {
                 System.out.printf("App with lowest rating in %s category: %s (%s)\n", category, lList.get(category)[0], lList.get(category)[1]);
             }
 
-            HashMap<String, Float> avg = c.average(overall);
+            TreeMap<String, Float> avg = c.average(overall);
             for(String category : avg.keySet()) {
                 System.out.printf("Average rating in %s category: %f\n", category, avg.get(category));
             }

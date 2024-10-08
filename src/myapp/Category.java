@@ -1,11 +1,12 @@
 package myapp;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Category {
 
 
-    public HashMap<String, String[]> highest(HashMap<String, HashMap<String, Float>> overall) {
+    public TreeMap<String, String[]> highest(HashMap<String, HashMap<String, Float>> overall) {
 
         HashMap<String, String[]> hList = new HashMap<String, String[]>();
 
@@ -24,10 +25,11 @@ public class Category {
             result[1] = String.valueOf(max);
             hList.put(category, result);
         }
-        return hList;
+        TreeMap<String, String[]> sorted = new TreeMap<>(hList);
+        return sorted;
     }
 
-    public HashMap<String, String[]> lowest(HashMap<String, HashMap<String, Float>> overall) {
+    public TreeMap<String, String[]> lowest(HashMap<String, HashMap<String, Float>> overall) {
 
         HashMap<String, String[]> lList = new HashMap<String, String[]>();
 
@@ -46,10 +48,11 @@ public class Category {
             result[1] = String.valueOf(min);
             lList.put(category, result);
         }
-        return lList;
+        TreeMap<String, String[]> sorted = new TreeMap<>(lList);
+        return sorted;
     }
 
-    public HashMap<String, Float> average(HashMap<String, HashMap<String, Float>> overall) {
+    public TreeMap<String, Float> average(HashMap<String, HashMap<String, Float>> overall) {
 
         HashMap<String, Float> avg = new HashMap<String, Float>();
 
@@ -61,7 +64,7 @@ public class Category {
             }
             avg.put(category, total/rate.size());
         }
-        return avg;
+        TreeMap<String, Float> sorted = new TreeMap<>(avg);
+        return sorted;
     }
-    
 }
